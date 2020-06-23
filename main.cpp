@@ -1,47 +1,41 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-using namespace sf;
-
 int main()
 {
-    RenderWindow window(VideoMode(800, 800), "SFML works!");
-    RectangleShape rect(Vector2f(100.0f, 100.0f));
-    rect.setFillColor(Color::Green);
-    rect.setPosition(Vector2f(0, 0));
-    Time t0 = milliseconds(0);
-    Clock clock;
-    Vector2f rect_position(0, 0);
-
+    sf::RenderWindow window(sf::VideoMode(800, 800), "A game");
+    sf::Time t0 = sf::milliseconds(0);
+    sf::Clock clock;
+    sf::Font font;
+    sf::Text text1;
+    sf::Image icon;
+    font.loadFromFile("consola.ttf");
+    text1.setFont(font);
+    text1.setCharacterSize(30);
+    text1.setStyle(sf::Text::Regular);
+    text1.setFillColor(sf::Color::White);
+    text1.setString("Teste");
+    text1.setPosition(sf::Vector2f(400, 400));
+    icon.loadFromFile("icon.png");
+    window.setIcon(64, 64, icon.getPixelsPtr());
+    
     std::cout << sf::VideoMode::getDesktopMode().width << ", " << sf::VideoMode::getDesktopMode().height;
 
     while (window.isOpen())
     {
-        Time t1 = clock.getElapsedTime();
-        int dt = t1.asMilliseconds() - t0.asMilliseconds();
-        t0 = t1;
-        Event event;
+        sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == Event::Closed)
+            if (event.type == sf::Event::Closed)
                 window.close();
         }
 
-        if (Keyboard::isKeyPressed(Keyboard::Right)) {
-            rect.setPosition(rect.getPosition().x + 1 * dt, rect.getPosition().y);
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Left)) {
-            rect.setPosition(rect.getPosition().x - 1 * dt, rect.getPosition().y);
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Down)) {
-            rect.setPosition(rect.getPosition().x, rect.getPosition().y + 1 * dt);
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Up)) {
-            rect.setPosition(rect.getPosition().x, rect.getPosition().y - 1 * dt);
-        }
+        sf::Time t1 = clock.getElapsedTime();
+        sf::Time delta = t1 - t0;
+        t0 = t1;
 
         window.clear();
-        window.draw(rect);
+        window.draw(text1);
         window.display();
     }
 
