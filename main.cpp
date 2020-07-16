@@ -1,26 +1,31 @@
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <string>
 #include <iostream>
+
+void handle_error(bool error_test, std::string error_message)
+{
+    if (error_test)
+    {
+        std::cout << std::endl << error_message << std::endl;
+        exit(1);
+    }
+}
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 800), "A game");
-    sf::Time t0 = sf::milliseconds(0);
-    sf::Clock clock;
-    sf::Font font;
-    sf::Text text1;
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "Typing...", sf::Style::Close);
     sf::Image icon;
-    font.loadFromFile("consola.ttf");
-    text1.setFont(font);
-    text1.setCharacterSize(30);
-    text1.setStyle(sf::Text::Regular);
-    text1.setFillColor(sf::Color::White);
-    text1.setString("Teste");
-    text1.setPosition(sf::Vector2f(400, 400));
     icon.loadFromFile("icon.png");
-    window.setIcon(64, 64, icon.getPixelsPtr());
-    
-    std::cout << sf::VideoMode::getDesktopMode().width << ", " << sf::VideoMode::getDesktopMode().height;
-
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    sf::Font font;
+    handle_error(!font.loadFromFile("cour.ttf"), "Error loading font");
+    sf::Text text;
+    sf::Text input;
+    text.setFont(font);
+    input.setFont(font);
+    input.setPosition(0, 100);
+    text.setString("Hello World!");
     while (window.isOpen())
     {
         sf::Event event;
@@ -28,15 +33,20 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            else if (event.type == sf::Event::TextEntered) // Text typed
+            {
+                if (event.key.code == 8) // Backspace was typed
+                    input.setString(input.getString().substring(0, input.getString().getSize() - 1));
+                else // Something else was typed
+                    input.setString(input.getString() + event.text.unicode);
+                std::wcout << std::endl << input.getString().toWideString();
+            }
+            window.clear(sf::Color::Black);
+            window.draw(input);
+            window.draw(text);
+            window.display();
         }
-
-        sf::Time t1 = clock.getElapsedTime();
-        sf::Time delta = t1 - t0;
-        t0 = t1;
-
-        window.clear();
-        window.draw(text1);
-        window.display();
+        
     }
 
     return 0;
