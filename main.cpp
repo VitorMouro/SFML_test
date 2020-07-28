@@ -34,7 +34,7 @@ std::vector<std::wstring> readFile(std::wstring path)
 	std::vector<std::wstring> word_vector;
 	std::wcout << "Loading words" << '\n';
 	int counter = 0;
-	float n_words = 10000.f;
+	float n_words = 1000.f;
 	while (file >> word)
 	{
 		word_vector.push_back(word);
