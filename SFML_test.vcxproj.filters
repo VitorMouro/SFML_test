@@ -20,9 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="consola.ttf">
-      <Filter>Resource Files</Filter>
-    </Font>
     <Font Include="cour.ttf">
       <Filter>Resource Files</Filter>
     </Font>
@@ -36,5 +33,16 @@
     <Text Include="todo.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="words_br.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="words_en.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="type.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

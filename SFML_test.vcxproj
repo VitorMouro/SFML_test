@@ -142,7 +142,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="consola.ttf" />
     <Font Include="cour.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +149,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="todo.txt" />
+    <Text Include="words_br.txt" />
+    <Text Include="words_en.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="type.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
