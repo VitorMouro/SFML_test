@@ -4,4 +4,4 @@
 
 ![Demo image](demo.png)
 
-## It's quite raw and would need a lot of refeactoring to implement new features, so for now I's abandoned.
+### It's quite raw and would need a lot of refeactoring to implement new features, so for now it's abandoned.
